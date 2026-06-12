@@ -39,3 +39,26 @@ class Solution {
         return pow(x,num);
     }
 }
+
+
+// Majority Element
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n = nums.length;
+        int cnt = 0, maj = -1;
+        for(int i=0;i<n;i++){
+            if(cnt == 0){
+                cnt = 1;
+                maj = nums[i];
+            }
+            else if(nums[i] == maj) cnt++;
+            else cnt--;
+        }
+        cnt = 0;
+        for(int i=0;i<n;i++){
+            if(nums[i] == maj) cnt++;
+        }
+        if(cnt > (n/2)) return maj;
+        return -1;
+    }
+}
