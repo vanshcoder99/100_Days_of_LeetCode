@@ -60,3 +60,14 @@ class Solution {
         return min;
     }
 }
+
+
+// Delete Node in a Linked List
+class Solution {
+    public void deleteNode(ListNode node) {
+        if(node == null) return;
+        ListNode nextnode = node.next;
+        node.val = nextnode.val;
+        node.next = node.next.next;
+    }
+}
