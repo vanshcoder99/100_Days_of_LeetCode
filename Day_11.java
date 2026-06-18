@@ -14,3 +14,24 @@ class Solution {
         return list;
     }
 }
+
+
+// Find the Duplicate Number
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int n = nums.length;
+        if(n == 1) return nums[0];
+        int slow = nums[0], fast = nums[0];
+        while(true){
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if(slow == fast) break;
+        }
+        fast = nums[0];
+        while(slow != fast){
+            fast = nums[fast];
+            slow = nums[slow];
+        }
+        return fast;
+    }
+}
