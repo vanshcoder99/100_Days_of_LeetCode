@@ -79,3 +79,38 @@ class Solution {
         return ans;
     }
 }
+
+
+// Majority Element II
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int n = nums.length;
+        List<Integer> ans = new ArrayList<>();
+        int cnt1 = 0, cnt2 = 0;
+        int mele1 = -1 , mele2 = -1;
+        for(int i=0;i<n;i++){
+            if(cnt1 == 0 && mele2 != nums[i]){
+                cnt1 = 1;
+                mele1 = nums[i];
+            }
+            else if(cnt2 == 0 && mele1 != nums[i]){
+                cnt2 = 1;
+                mele2 = nums[i];
+            }
+            else if(mele1 == nums[i]) cnt1++;
+            else if(mele2 == nums[i]) cnt2++;
+            else{
+                cnt1--;
+                cnt2--;
+            }
+        }
+        int cnt3 = 0, cnt4 = 0;
+        for(int i=0;i<n;i++){
+            if(mele1 == nums[i]) cnt3++;
+            else if(mele2 == nums[i]) cnt4++;
+        }
+        if(cnt3 > n/3) ans.add(mele1);
+        if(cnt4 > n/3 && mele1 != mele2) ans.add(mele2);
+        return ans;
+    }
+}
