@@ -39,3 +39,24 @@ class Solution {
         return cnt[0];
     }
 }
+
+
+//  Remove Nth Node From End of List
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode fast = head;
+        while(n!=0){
+            if(fast == null) return head;
+            fast = fast.next;
+            n--;
+        }
+        if(fast == null) return head.next;
+        ListNode slow = head;
+        while(fast.next != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+        return head;
+    }
+}
