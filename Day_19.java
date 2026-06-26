@@ -122,3 +122,23 @@ class Solution {
         return newhead;
     }
 }
+
+
+
+// Max Consecutive Ones
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int n = nums.length;
+        int mcnt = 0, cnt = 0;
+        for(int i=0;i<n;i++){
+            if(nums[i] == 1){
+                cnt++;
+                mcnt = Math.max(mcnt,cnt);
+            }
+            else{
+                cnt = 0;
+            }
+        }
+        return mcnt;
+    }
+}
