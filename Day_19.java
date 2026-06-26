@@ -57,3 +57,41 @@ class Solution {
         return dummy.next;
     }
 }
+
+
+
+// Palindrome Linked List
+class Solution {
+    public ListNode middle(ListNode head){
+        ListNode slow = head, fast = head;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+    public ListNode reverseLL(ListNode head){
+        ListNode curr = head, prev = null;
+        while(curr != null){
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null) return true;
+        ListNode mid = middle(head);
+        ListNode t2 = reverseLL(mid.next);
+        mid.next = null;
+        ListNode t1 = head;
+        while(t1 != null && t2 != null){
+            if(t1.val != t2.val) return false;
+            t1 = t1.next;
+            t2 = t2.next;
+        }
+        return true;
+    }
+}
