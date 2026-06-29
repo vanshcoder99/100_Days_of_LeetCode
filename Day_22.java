@@ -44,3 +44,39 @@ class Solution {
         return mergesort(0,n-1,nums);
     }
 }
+
+
+
+// Detect a cycle in undirected graph --> GFG
+class Solution {
+    public boolean dfs(int node,int parent, boolean[] vis,List<List<Integer>> adj){
+        vis[node] = true;
+        for(var it : adj.get(node)){
+            if(!vis[it]){
+                if(dfs(it,node,vis,adj)) return true;
+            }
+            else if(parent != it) return true;
+        }
+        return false;
+    }
+    public boolean isCycle(int V, int[][] edges) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            adj.add(new ArrayList<>());
+        }
+        
+        for(var it : edges){
+            adj.get(it[0]).add(it[1]);
+            adj.get(it[1]).add(it[0]);
+        }
+        
+        boolean[] vis = new boolean[V];
+        
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                if(dfs(i,-1,vis,adj)) return true;
+            }
+        }
+        return false;
+    }
+}
