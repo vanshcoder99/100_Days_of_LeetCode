@@ -69,3 +69,28 @@ class Solution {
         return false;
     }
 }
+
+// Longest Consecutive Sequence
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int n = nums.length;
+        Set<Integer> st = new HashSet<>();
+        for(int i=0;i<n;i++){
+            st.add(nums[i]);
+        }
+        int maxcnt = 0;
+        for(var it : st){
+            int cnt = 1;
+            if(st.contains(it-1)) continue;
+            else {
+                int x = it;
+                while(st.contains(x+1)){
+                    x++;
+                    cnt++;
+                }
+                maxcnt = Math.max(cnt,maxcnt);
+            }
+        }
+        return maxcnt;
+    }
+}
