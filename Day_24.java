@@ -98,3 +98,43 @@ class Solution {
         return true;
     } 
 }
+
+
+// Topological Sort
+class Solution {
+    public void dfs(int node,boolean[] vis,Stack<Integer> st,List<List<Integer>> adj){
+        vis[node] = true;
+        for(var it : adj.get(node)){
+            if(!vis[it]){
+                dfs(it,vis,st,adj);
+            }
+        }
+        st.push(node);
+    }
+    public ArrayList<Integer> topoSort(int V, int[][] edges) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int n = edges.length;
+        if(n == 0) return ans;
+        int m = edges[0].length;
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<V;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(var it : edges){
+            adj.get(it[0]).add(it[1]);
+        }
+        
+        boolean[] vis = new boolean[V];
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                dfs(i,vis,st,adj);
+            }
+        }
+        
+        while(!st.isEmpty()){
+            ans.add(st.pop());
+        }
+        return ans;
+    }
+}
