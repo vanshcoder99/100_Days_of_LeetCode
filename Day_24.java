@@ -70,3 +70,31 @@ class Solution {
         return ans;
     }
 }
+
+
+
+//  Is Graph Bipartite?
+class Solution {
+    public boolean dfs(int node,int[] color,int[][] adj) {
+        for(var it : adj[node]){
+            if(color[it] == color[node]) return false;
+            else if(color[it] == -1){
+                color[it] = 1 - color[node];
+                if(!dfs(it,color,adj))  return false;
+            }
+        }
+        return true;
+    }
+    public boolean isBipartite(int[][] graph) {
+        int V = graph.length;
+        int[] color = new int[V];
+        Arrays.fill(color,-1);
+        for(int i=0;i<V;i++){
+            if(color[i] == -1){
+                color[i] = 0;
+                if(!dfs(i,color,graph)) return false;
+            }
+        }
+        return true;
+    } 
+}
