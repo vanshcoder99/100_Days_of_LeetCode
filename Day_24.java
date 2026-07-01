@@ -33,3 +33,40 @@ class Solution {
         return false;
     }
 }
+
+
+
+// Find Eventual Safe States
+class Solution {
+    public boolean dfs(int node,boolean[] vis,boolean[] pathVis,boolean[] check,int[][] adj) {
+        vis[node] = true;
+        pathVis[node] = true;
+        for(var it : adj[node]){
+            if(pathVis[it]) return true;
+            else if(!vis[it]){
+                if(dfs(it,vis,pathVis,check,adj)) return true;
+            }
+        }
+        pathVis[node] = false;
+        check[node] = true;
+        return false;
+    }
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int V = graph.length;
+        List<Integer> ans = new ArrayList<>();
+        boolean[] vis = new boolean[V];
+        boolean[] pathVis = new boolean[V];
+        boolean[] check = new boolean[V];
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                dfs(i,vis,pathVis,check,graph);
+            }
+        }
+        for(int i=0;i<V;i++){
+            if(check[i]){
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
