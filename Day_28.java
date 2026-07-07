@@ -53,3 +53,27 @@ class Solution {
         return sb.toString();
     }
 }
+
+
+
+// Longest Subarray with Sum K
+class Solution {
+    public int longestSubarray(int[] nums, int k) {
+        int n = nums.length;
+        if(n == 0) return 0;
+        Map<Integer,Integer> mpp = new HashMap<>();
+        int presum = 0, maxlen = 0; 
+        for(int i=0;i<n;i++){
+            presum+=nums[i];
+            if(presum == k) maxlen = Math.max(maxlen,i+1);
+            else{
+                if(mpp.containsKey(presum-k)){
+                    int idx = mpp.get(presum-k);
+                    maxlen = Math.max(maxlen,i-idx);
+                }
+            }
+            if(!mpp.containsKey(presum)) mpp.put(presum,i);
+        }
+        return maxlen;
+    }
+}
