@@ -53,3 +53,33 @@ class Solution {
         return dis;
     }
 }
+
+
+
+// Zigzag Conversion
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1) return s;
+        int n = s.length();
+        StringBuilder[] str = new StringBuilder[numRows];
+        for(int i=0;i<numRows;i++){
+            str[i] = new StringBuilder();
+        }
+        int cr = 0;
+        boolean dirn = true;
+        for(int i=0;i<n;i++){
+            str[cr].append(s.charAt(i));
+            if(dirn) cr++;
+            else cr--;
+            if(cr == 0 || cr == numRows - 1) dirn = !dirn;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<numRows;i++){
+            sb.append(str[i]);
+        }
+
+        return sb.toString();
+        
+    }
+}
