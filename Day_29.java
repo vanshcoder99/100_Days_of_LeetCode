@@ -122,3 +122,24 @@ class Solution {
         return list;
     }
 }
+
+
+
+// Count Subarrays with given XOR
+class Solution {
+    public long subarrayXor(int arr[], int k) {
+        int n = arr.length;
+        int prexor = 0;
+        long cnt = 0;
+        HashMap<Integer,Integer> mpp = new HashMap<>();
+        mpp.put(0,1);
+        for(int i=0;i<n;i++){
+            prexor^=arr[i];
+            if(mpp.containsKey(prexor^k)){
+                cnt+=(long)mpp.get(prexor^k);
+            }
+            mpp.put(prexor,mpp.getOrDefault(prexor,0)+1);
+        }
+        return cnt;
+    }
+}
