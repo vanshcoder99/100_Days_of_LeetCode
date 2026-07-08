@@ -143,3 +143,39 @@ class Solution {
         return cnt;
     }
 }
+
+
+
+// Find Resultant Array After Removing Anagrams
+class Solution {
+    public boolean isAnagram(String[] words,int idx){
+        int l1 = words[idx-1].length();
+        int l2 = words[idx].length();
+        if(l1 != l2) return false;
+        int[] freq = new int[26];
+        String s1 = words[idx];
+        String s2 = words[idx-1];
+        for(int i=0;i<l1;i++){
+            freq[s1.charAt(i)-'a']++;
+        }
+        for(int i=0;i<l1;i++){
+            freq[s2.charAt(i)-'a']--;
+        }
+        for(int i=0;i<26;i++){
+            if(freq[i] != 0) return false;
+        }
+        return true;
+    }
+    public List<String> removeAnagrams(String[] words) {
+        List<String> ans = new ArrayList<>();
+        int n = words.length;
+        ans.add(words[0]);
+        for(int i=1;i<n;i++){
+            if(!isAnagram(words,i)){
+                ans.add(words[i]);
+            }
+        }
+
+        return ans;
+    }
+}
