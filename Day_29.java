@@ -83,3 +83,42 @@ class Solution {
         
     }
 }
+
+
+
+// Maximum Sub Array
+class Solution {
+    public ArrayList<Integer> findSubarray(int nums[]) {
+        int n = nums.length;
+        ArrayList<Integer> ans = new ArrayList<>();
+        int ansst = -1, ansed = -1, start = -1, maxi = 0, sum = 0,maxlen=0;
+        for(int i=0;i<n;i++){
+            int val = nums[i];
+            if(val<0){
+                sum = 0;
+                start = -1;
+                continue;
+            }
+            if(start == -1) start = i;
+            sum+=val;
+            if(((i-start+1)>maxlen && sum>=maxi) || (sum > maxi)) {
+                maxi = sum;
+                ansst = start;
+                ansed = i;
+                maxlen = i - start + 1;
+            }
+        }
+        
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        if(ansst == -1){
+            list.add(-1);
+            return list;
+        }
+        for(int i=ansst;i<=ansed;i++){
+            list.add(nums[i]);
+        }
+        
+        return list;
+    }
+}
