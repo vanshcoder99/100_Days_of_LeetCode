@@ -52,3 +52,22 @@ class Solution {
         return (minlen != Integer.MAX_VALUE) ? minlen : 0;
     }
 }
+
+
+
+// Minimum Positive Sum Subarray 
+class Solution {
+    public int minimumSumSubarray(List<Integer> nums, int l, int r) {
+        int n = nums.size();
+        int minsum = Integer.MAX_VALUE, len = 0;
+        for(int i=0;i<n;i++){
+            int sum = 0;
+            for(int j=i;j<n;j++){
+                sum+=nums.get(j);
+                len = j - i + 1;
+                if(l<=len && len<=r && sum>0)  minsum = Math.min(minsum,sum);
+            }
+        }
+        return (minsum!= Integer.MAX_VALUE) ? minsum : -1;
+    }
+}
