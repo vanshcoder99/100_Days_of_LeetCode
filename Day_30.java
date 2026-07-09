@@ -33,3 +33,22 @@ class Solution {
         return (double)maxsum/k;
     }
 }
+
+
+// Minimum Size Subarray Sum
+class Solution {
+    public int minSubArrayLen(int k, int[] nums) {
+        int n = nums.length;
+        int minlen = Integer.MAX_VALUE, sum = 0,l=0;
+        for(int r=0;r<n;r++){
+            sum+=nums[r];
+            while(sum>=k && l<=r){
+                minlen = Math.min(minlen,r-l+1);
+                sum-=nums[l];
+                l++;
+            }
+        }
+
+        return (minlen != Integer.MAX_VALUE) ? minlen : 0;
+    }
+}
