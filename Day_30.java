@@ -71,3 +71,22 @@ class Solution {
         return (minsum!= Integer.MAX_VALUE) ? minsum : -1;
     }
 }
+
+
+
+// Maximum point you can obtain from cards
+class Solution {
+    public int maxScore(int[] cards, int k) {
+        int n = cards.length;
+        int sum = 0, maxsum = 0;
+        for(int i=0;i<k;i++){
+            sum+=cards[i];
+        }
+        maxsum = Math.max(maxsum,sum);
+        for(int i=k-1;i>=0;i--){
+            sum = sum - cards[i] + cards[n-k+i];
+            maxsum = Math.max(maxsum,sum);
+        }
+        return maxsum;
+    }
+}
