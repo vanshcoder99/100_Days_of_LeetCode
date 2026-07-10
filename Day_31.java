@@ -22,3 +22,22 @@ class Solution {
         return ans;       
     }
 }
+
+
+
+//  Longest Substring Without Repeating Characters
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int[] hash = new int[256];
+        Arrays.fill(hash,-1);
+        int maxlen = 0, l = 0;
+        for(int r=0;r<n;r++){
+            char ch = s.charAt(r);
+            if(hash[ch] >= l) l = hash[ch] + 1;
+            hash[ch] = r;
+            maxlen = Math.max(maxlen,r-l+1);
+        }
+        return maxlen;
+    }
+}
