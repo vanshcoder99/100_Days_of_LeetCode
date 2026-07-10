@@ -41,3 +41,24 @@ class Solution {
         return maxlen;
     }
 }
+
+
+
+// Maximum Length Substring With Two Occurrences
+class Solution {
+    public int maximumLengthSubstring(String s) {
+        int n = s.length();
+        int maxlen = 0, l = 0;
+        int[] hash = new int[26];
+        for(int r=0;r<n;r++){
+            char ch = s.charAt(r);
+            hash[ch-'a']++;
+            while(hash[ch-'a'] > 2){
+                hash[s.charAt(l)-'a']--;
+                l++;
+            }
+            maxlen = Math.max(maxlen,r - l + 1);
+        }
+        return maxlen;
+    }
+}
