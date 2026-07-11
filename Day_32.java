@@ -32,3 +32,27 @@ class Solution {
         return cnt;
     }
 }
+
+
+
+//Maximum XOR for Each Query
+class Solution {
+    public int[] getMaximumXor(int[] nums, int maxBit) {
+        int n = nums.length, maxxor = (int)Math.pow(2,maxBit)-1;
+        int[] prexor = new int[n];
+        prexor[0] = nums[0];
+        for(int i=1;i<n;i++){
+            prexor[i] = prexor[i-1] ^ nums[i];
+        }
+        int i = 0, j = n-1;
+        while(i<=j){
+            int temp = prexor[i];
+            prexor[i] = prexor[j] ^ maxxor;
+            prexor[j] = temp ^ maxxor;
+            i++;
+            j--;
+        }
+        
+        return prexor;
+    }
+}
