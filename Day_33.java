@@ -38,3 +38,24 @@ class Solution {
         return (twt/n);
     }
 }
+
+
+
+// Longest Harmonious Subsequence
+class Solution {
+    public int findLHS(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int l = 0,maxlen = 0,min=nums[0],max=nums[0];
+        for(int r=1;r<n;r++){
+            max=nums[r];
+            if(min == max) continue;
+            while((l<r) && (max-min) != 1){
+                l++;
+                min = nums[l];
+            }
+            if(max-min == 1)maxlen = Math.max(maxlen,r-l+1);
+        }
+        return maxlen;
+    }
+}
