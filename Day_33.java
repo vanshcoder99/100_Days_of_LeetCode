@@ -23,3 +23,18 @@ class Solution {
         return true;
     }
 }
+
+
+// Shortest Job First
+class Solution {
+    static int solve(int bt[]) {
+        int n = bt.length;
+        Arrays.sort(bt);
+        int twt = 0, wt = 0;
+        for(int i=1;i<n;i++){
+            wt+=bt[i-1];
+            twt+=wt;
+        }
+        return (twt/n);
+    }
+}
