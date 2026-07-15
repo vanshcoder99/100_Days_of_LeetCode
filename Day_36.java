@@ -21,3 +21,22 @@ class Solution {
         return atmost(nums,k) - atmost(nums,k-1);        
     }
 }
+
+
+
+// Count Subarrays With Score Less Than K
+class Solution {
+    public long countSubarrays(int[] nums, long k) {
+        int n = nums.length, l = 0;
+        long cnt = 0, sum = 0;
+        for(int r=0;r<n;r++){
+            sum+=nums[r];
+            while(sum * (r-l+1) >= k){
+                sum-=nums[l];
+                l++;
+            }
+            cnt+=(r-l+1);
+        }
+        return cnt;
+    }
+}
