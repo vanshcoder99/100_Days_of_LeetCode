@@ -40,3 +40,26 @@ class Solution {
         return cnt;
     }
 }
+
+
+// Continuous Subarray Sum
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        int n = nums.length;
+        int presum = 0;
+        Map<Integer,Integer> mpp = new HashMap<>();
+        for(int i=0;i<n;i++){
+            presum+=nums[i];
+            int rem = presum % k;
+            if(rem == 0){
+                if(i+1 >= 2) return true;
+            }
+            if(mpp.containsKey(rem)){
+                int idx = mpp.get(rem);
+                if(i-idx>=2) return true;
+            }
+            else mpp.put(rem,i);
+        }
+        return false;
+    }
+}
