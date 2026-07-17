@@ -35,3 +35,21 @@ class Solution {
         return sb.toString();
     }
 }
+
+
+
+// Minimum Number of Arrows to Burst Balloons
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        int n = points.length;
+        Arrays.sort(points,(a,b) -> Integer.compare(a[1],b[1]));
+        int cnt = 1, ed = points[0][1];
+        for(int i=1;i<n;i++){
+            if(ed<points[i][0]){
+                cnt++;
+                ed = points[i][1];
+            }
+        }
+        return cnt;
+    }
+}
