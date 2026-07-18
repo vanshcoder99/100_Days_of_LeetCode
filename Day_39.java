@@ -18,3 +18,29 @@ class Solution {
         return atmost(nums,k) - atmost(nums,k-1);
     }
 }
+
+
+
+// Find All Anagrams in a String
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int n = s.length(), m = p.length();
+        List<Integer> ans = new ArrayList<>();
+        if(m>n) return ans;
+        int[] freqp = new int[26];
+        int[] freqw = new int[26];
+        for(int i=0;i<m;i++){
+            freqp[p.charAt(i) -'a']++;
+            freqw[s.charAt(i) -'a']++;
+        }
+        int st = 0;
+        if(Arrays.equals(freqp,freqw)) ans.add(st);
+        for(int i=m;i<n;i++){
+            freqw[s.charAt(i-m)-'a']--;
+            freqw[s.charAt(i)-'a']++;
+            st++;
+            if(Arrays.equals(freqp,freqw)) ans.add(st);
+        }
+        return ans;
+    }
+}
