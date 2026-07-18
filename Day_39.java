@@ -44,3 +44,21 @@ class Solution {
         return ans;
     }
 }
+
+
+
+// Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+class Solution {
+    public int numOfSubarrays(int[] arr, int k, int th) {
+        int n = arr.length,sum=0,cnt=0;
+        for(int i=0;i<k;i++){
+            sum+=arr[i];
+        }
+        if(sum/k >= th) cnt++;
+        for(int i=k;i<n;i++){
+            sum = sum - arr[i-k] + arr[i];
+            if(sum/k >= th) cnt++;
+        }
+        return cnt;
+    }
+}
