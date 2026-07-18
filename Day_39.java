@@ -62,3 +62,26 @@ class Solution {
         return cnt;
     }
 }
+
+
+// K Radius Subarray Averages
+class Solution {
+    public int[] getAverages(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans,-1);
+        if(2*k+1>n) return ans;
+        if(k==0) return nums;
+        long sum = 0;
+        for(int i=0;i<2*k+1;i++){
+            sum+=nums[i];
+        }
+        for(int i=k;i<n-k;i++){
+            ans[i] = (int)(sum/(2*k+1));
+            if(i==n-k-1) break;
+            sum-=nums[i-k];
+            sum+=nums[i+k+1];
+        }
+        return ans;
+    }
+}
