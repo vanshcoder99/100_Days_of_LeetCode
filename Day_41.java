@@ -21,3 +21,26 @@ class Solution {
         return (min == 0);
     }
 }
+
+
+// Partition Labels
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> ans = new ArrayList<>();
+        int n = s.length();
+        int[] last = new int[26];
+        for(int i=0;i<n;i++){
+            last[s.charAt(i)-'a'] = i;
+        }
+        int st = 0, end = 0;
+        for(int i=0;i<n;i++){
+            end = Math.max(end,last[s.charAt(i)-'a']);
+            if(end == i){
+                ans.add(end-st+1);
+                st = end + 1;
+            }
+        }
+
+        return ans;
+    }
+}
