@@ -12,3 +12,26 @@ class Solution {
         return -1;  
     }
 }
+
+
+
+// Boats to Save People
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        Arrays.sort(people);
+        int n = people.length, cnt=0;
+        int l = 0,r=n-1;
+        while(l<=r){
+            if(people[r] + people[l] <= limit){
+                cnt++;
+                r--;
+                l++;
+            }
+            else if(people[r]<=limit){
+                cnt++;
+                r--;
+            }
+        }
+        return cnt;
+    }
+}
