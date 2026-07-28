@@ -18,3 +18,28 @@ class Solution {
         return cnt;
     }
 }
+
+
+// Longest Substring with At Least K Repeating Characters
+class Solution {
+    public int func(String s, int k, int st, int end){
+        if(end-st<k) return 0;
+        int[] hash = new int[26];
+        for(int i=st;i<end;i++){
+            hash[s.charAt(i)-'a']++;
+        }
+
+        for(int i=st;i<end;i++){
+            if(hash[s.charAt(i)-'a'] < k){
+                int left = func(s,k,st,i);
+                int right = func(s,k,i+1,end);
+                return Math.max(left,right);
+            }
+        }
+        return end-st;
+    } 
+    public int longestSubstring(String s, int k) {
+        if(k>s.length()) return 0; 
+        return func(s,k,0,s.length());
+    }
+}
