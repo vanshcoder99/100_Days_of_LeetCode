@@ -20,3 +20,24 @@ class Solution {
         return ans;
     }
 }
+
+
+
+// Kth Largest Element in an Array
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<k;i++){
+            pq.offer(nums[i]);
+        }
+        for(int i=k;i<n;i++){
+            int val = nums[i];
+            if(val>pq.peek()){
+                pq.poll();
+                pq.offer(val);
+            }
+        }
+        return pq.peek();
+    }
+}
