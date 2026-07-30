@@ -30,3 +30,31 @@ class Solution {
         return nums;
     }
 }
+
+
+
+// Sort Characters By Frequency
+class Solution {
+    public String frequencySort(String s) {
+        int n = s.length();
+        Map<Character,Integer> mpp = new HashMap<>();
+        for(int i=0;i<n;i++){
+            char ch = s.charAt(i);
+            mpp.put(ch,mpp.getOrDefault(ch,0)+1);
+        }
+        PriorityQueue<Character> pq = new PriorityQueue<>((a,b) -> Integer.compare(mpp.get(b), mpp.get(a)));
+        for(var it : mpp.keySet()){
+            pq.offer(it);
+        } 
+        StringBuilder sb = new StringBuilder();
+        while(!pq.isEmpty()){
+            char ch = pq.poll();
+            int freq = mpp.get(ch);
+            while(freq != 0){
+                sb.append(ch);
+                freq--;
+            }
+        }
+        return sb.toString();
+    }
+}
