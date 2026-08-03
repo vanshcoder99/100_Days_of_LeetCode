@@ -26,3 +26,30 @@ class Solution {
         return str;
     }
 }
+
+
+
+// Longest Palindrome
+class Solution {
+    public int longestPalindrome(String s) {
+        int n = s.length();
+        int[] hash = new int[125];
+        for(int i=0;i<n;i++){
+            hash[s.charAt(i)]++;
+        }
+        Arrays.sort(hash);
+        boolean flag = false;
+        int cnt = 0;
+        for(int i=124;i>=0;i--){
+            int freq = hash[i];
+            if(freq % 2 == 0) cnt+=freq;
+            else{
+                int val = freq - 1;
+                cnt+=val;
+                flag = true;    
+            }
+        }
+        
+        return flag ? cnt+1: cnt;
+    }
+}
