@@ -106,3 +106,30 @@ class Solution {
 
 
 
+// Shortest Path in Binary Matrix
+class Solution {
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int n = grid.length;
+        if(n == 1) return grid[0][0] == 0 ? 1 : -1;
+        if(grid[0][0] == 1 || grid[n-1][n-1] == 1) return -1;
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{0,0,1});
+        grid[0][0] = 1;
+        while(!q.isEmpty()){
+            int[] arr = q.poll();
+            int r = arr[0], c = arr[1], d = arr[2];
+            for(int i=-1;i<=1;i++){
+                for(int j=-1;j<=1;j++){
+                    int nr = r + i;
+                    int nc = c + j;
+                    if(nr>=0 && nr<n && nc>=0 && nc<n && grid[nr][nc] == 0){
+                        if(nr == n-1 && nc == n-1) return d + 1;
+                        q.offer(new int[]{nr,nc,d+1});
+                        grid[nr][nc] = 1;
+                    } 
+                }
+            }
+        }
+        return -1;
+    }
+}
