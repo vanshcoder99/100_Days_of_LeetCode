@@ -17,3 +17,33 @@ class Solution {
         return sb.toString();
     }
 }
+
+
+
+// Smallest distinct window
+class Solution {
+    public int findSubString(String str) {
+        int n = str.length();
+        int mcnt = Integer.MAX_VALUE, l = 0,cnt = 0;
+        Set<Character> st = new HashSet<>();
+        for(int i=0;i<n;i++){
+            st.add(str.charAt(i));
+        }
+        int ucnt = st.size();
+        int[] freq = new int[26];
+        
+        for(int r=0;r<n;r++){
+            char ch = str.charAt(r);
+            if(freq[ch-'a'] == 0) cnt++;
+            freq[ch-'a']++;
+            if(ucnt == cnt) mcnt = Math.min(mcnt,r-l+1);
+            while(ucnt == cnt &&freq[str.charAt(l)-'a']>1){
+                freq[str.charAt(l)-'a']--;
+                l++;
+                mcnt = Math.min(mcnt,r-l+1);
+            }
+        }
+        
+        return mcnt;
+    }
+}
