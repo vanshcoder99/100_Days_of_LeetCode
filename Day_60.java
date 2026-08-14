@@ -16,3 +16,27 @@ class Solution {
         return cnt;
     }
 }
+
+
+// Smallest Missing Integer Greater Than Sequential Prefix Sum
+class Solution {
+    public int missingInteger(int[] nums) {
+        int n = nums.length;
+        int sum = nums[0];
+        for(int i=1;i<n;i++){
+            if(nums[i] - 1 == nums[i-1]){
+                sum+=nums[i];
+            }
+            else break;
+        }
+        Set<Integer> st = new HashSet<>();
+        for(int it : nums){
+            st.add(it);
+        }
+        while(true){
+            if(st.contains(sum)) sum++;
+            else break;
+        }
+        return sum;
+    }
+}
