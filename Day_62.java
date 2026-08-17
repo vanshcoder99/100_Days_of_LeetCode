@@ -57,3 +57,26 @@ class Solution {
         return sum;
     }
 }
+
+
+
+
+//  Delete Columns to Make Sorted
+class Solution {
+    public int minDeletionSize(String[] strs) {
+        int n = strs.length;
+        int m = strs[0].length();
+        if(n == 1) return 0;
+        boolean[] vis = new boolean[m];
+        int cnt = 0;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<m;j++){
+                if((strs[i-1].charAt(j) > strs[i].charAt(j)) && !vis[j]){
+                    cnt++;
+                    vis[j] = true;
+                }
+            }
+        }
+        return cnt;
+    }
+}
