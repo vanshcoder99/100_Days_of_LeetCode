@@ -40,3 +40,33 @@ class Solution {
     return ans;
   }
 }
+
+
+
+// Maximum Units on a Truck
+class Solution {
+    public int maximumUnits(int[][] btypes, int ts) {
+        int n = btypes.length;
+        Arrays.sort(btypes,(a,b) -> {
+            if(a[1] == b[1]) return Integer.compare(a[0],b[0]);
+            return Integer.compare(b[1],a[1]);
+        });
+
+        long res = 0;        
+        int i = 0;
+        while(i<n && ts != 0){
+            if(ts-btypes[i][0]>= 0){
+                ts-=btypes[i][0];
+                res+=(btypes[i][0] * btypes[i][1]);
+            }
+            else if(ts>0){
+                res+=(ts * btypes[i][1]);
+                ts = 0;
+                break;
+            }
+            i++;
+        }
+
+        return (int)res;
+    }
+}
