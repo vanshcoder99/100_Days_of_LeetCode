@@ -15,3 +15,28 @@ class Solution {
         return size;
     }
 }
+
+
+
+
+// 1695. Maximum Erasure Value
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+        int n = nums.length;
+        if(n == 1) return nums[0];
+        HashSet<Integer> st = new HashSet<>();
+        int l = 0, sum = 0, maxsum = 0;
+        for(int r=0;r<n;r++){
+            int val = nums[r];
+            while(st.contains(val)){
+                st.remove(nums[l]);
+                sum-=nums[l];
+                l++;
+            }
+            sum+=val;
+            st.add(val);
+            maxsum = Math.max(maxsum,sum);
+        }
+        return maxsum;
+    }
+}
