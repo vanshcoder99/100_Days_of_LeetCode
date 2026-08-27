@@ -1,5 +1,4 @@
 // Longest Subarray of 1's After Deleting One Element
- // Longest Subarray of 1's After Deleting One Element
 class Solution {
     public int longestSubarray(int[] nums) {
         int n = nums.length;
