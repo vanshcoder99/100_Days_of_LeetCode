@@ -16,3 +16,38 @@ class Solution {
         return func(m-1,n-1,grid,dp);
     }
 }
+
+
+
+
+//Geek's Training
+class Solution {
+    public int func(int day,int last,int mat[][],int dp[][]) {
+        if(day == 0){
+            int maxi = 0;
+            for(int i=0;i<3;i++){
+                if(i != last){
+                    maxi = Math.max(maxi,mat[0][i]);
+                }
+            }
+            return maxi;
+        }
+        if(dp[day][last] != -1) return dp[day][last];
+        int maxi = 0;
+        for(int i=0;i<3;i++){
+            if(i != last){
+                int sum = mat[day][i] + func(day-1,i,mat,dp);
+                maxi = Math.max(maxi,sum);
+            }
+        }
+        return dp[day][last] = maxi;
+    }
+    public int maximumPoints(int mat[][]) {
+        int m = mat.length, n = mat[0].length;
+        int[][] dp = new int[m][4];
+        for(int i=0;i<m;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return func(m-1,3,mat,dp);
+    }
+}
