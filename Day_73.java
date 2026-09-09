@@ -52,3 +52,30 @@ class Solution {
         return func(0,1,k,prices,dp);
     }
 }
+
+
+
+
+// Best Time to Buy and Sell Stock with Transaction Fee
+class Solution {
+    public int func(int i,int buy,int fee,int[] arr,int[][] dp) {
+        if(i == arr.length) return 0;
+        if(dp[i][buy] != -1) return dp[i][buy];
+        int price = 0;
+        if(buy == 1){
+            price = Math.max((-1)*arr[i] + func(i+1,0,fee,arr,dp),0+func(i+1,1,fee,arr,dp));
+        }
+        else{
+            price = Math.max(arr[i]-fee+func(i+1,1,fee,arr,dp),0+func(i+1,0,fee,arr,dp));
+        }
+        return dp[i][buy] = price;
+    }
+    public int maxProfit(int[] prices, int fee) {
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        for(int i=0;i<n;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return func(0,1,fee,prices,dp);
+    }
+}
