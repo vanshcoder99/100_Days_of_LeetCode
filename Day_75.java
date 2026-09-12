@@ -21,3 +21,27 @@ class Solution {
         return func(n-1,target,nums,dp);
     }
 }
+
+
+
+
+// Knapsack with Duplicate Items
+class Solution {
+    public int knapSack(int val[], int wt[], int W) {
+        int n = val.length;
+        int[][] dp = new int[n][W+1];
+        for(int w=1;w<=W;w++){
+            dp[0][w] = w/wt[0] * val[0];
+        }
+        
+        for(int i=1;i<n;i++){
+            for(int j=1;j<=W;j++){
+                int nottake = dp[i-1][j];
+                int take = (int)-1e9;
+                if(j>=wt[i]) take = val[i] + dp[i][j-wt[i]];
+                dp[i][j] = Math.max(take,nottake); 
+            }
+        }   
+        return dp[n-1][W];
+    }
+}
