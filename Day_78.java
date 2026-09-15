@@ -28,3 +28,47 @@ class Solution {
         return list.size();
     }
 }
+
+
+
+
+// Get Longest Increasing Subsequence
+class Solution {
+    public ArrayList<Integer> getLIS(int nums[]) {
+       int n = nums.length;
+       int[] dp = new int[n];
+       int[] parent = new int[n];
+       for(int i=0;i<n;i++){
+           dp[i] = 1;
+           parent[i] = i; 
+       }
+       for(int i=0;i<n;i++){
+           for(int j=0;j<i;j++){
+               if(nums[i]>nums[j]){
+                   int val = 1 + dp[j];
+                   if(dp[i] < val){
+                       dp[i] = val;
+                       parent[i] = j;
+                   }
+               }
+           }
+       }
+       int stidx = -1,x = 0;
+       for(int i=0;i<n;i++){
+           if(x<dp[i]){
+               x = dp[i];
+               stidx = i;
+           }
+       }
+       
+       ArrayList<Integer> ans = new ArrayList<>();
+
+       while(stidx != parent[stidx]){
+           ans.add(nums[stidx]);
+           stidx = parent[stidx];
+       }
+       ans.add(nums[stidx]);
+       Collections.reverse(ans);
+       return ans;
+    }
+}
