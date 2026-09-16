@@ -26,3 +26,22 @@ class Solution {
         return mval;
     }
 }
+
+
+
+
+// 1143. Longest Common Subsequence
+class Solution {
+    public int func(int i,int j,String t1, String t2,int[][] dp) {
+        if(i<0 || j<0) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+        if(t1.charAt(i) == t2.charAt(j)) return dp[i][j] = 1 + func(i-1,j-1,t1,t2,dp);
+        return dp[i][j] = Math.max(func(i,j-1,t1,t2,dp),func(i-1,j,t1,t2,dp));
+    }
+    public int longestCommonSubsequence(String t1, String t2) {
+        int n1 = t1.length(), n2 = t2.length();
+        int[][] dp = new int[n1][n2];
+        for(int i=0;i<n1;i++) Arrays.fill(dp[i],-1);
+        return func(n1-1,n2-1,t1,t2,dp);
+    }
+}
