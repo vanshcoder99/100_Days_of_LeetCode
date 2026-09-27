@@ -26,3 +26,26 @@ class Solution {
         return Math.max(val1,val2);
     }
 }
+
+
+
+
+// 1749. Maximum Absolute Sum of Any Subarray
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int n = nums.length;
+        int maxi = Integer.MIN_VALUE, mini = Integer.MAX_VALUE;
+        int sum1 = 0,sum2 = 0;
+        for(int i=0;i<n;i++){
+            int val = nums[i];
+            sum1+=val;
+            sum2+=val;
+            maxi = Math.max(sum1,maxi);
+            mini = Math.min(sum2,mini);
+            if(sum1<0) sum1 = 0;
+            if(sum2>0) sum2 = 0;
+        }
+        mini = Math.abs(mini);
+        return Math.max(maxi,mini);
+    }
+}
