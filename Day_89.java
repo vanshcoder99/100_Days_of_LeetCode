@@ -23,3 +23,23 @@ class Solution {
         return sum;
     }
 }
+
+
+
+// 646. Maximum Length of Pair Chain
+class Solution {
+    public int findLongestChain(int[][] pairs) {
+        int n = pairs.length;
+        Arrays.sort(pairs,(a,b) -> Integer.compare(a[1],b[1]));
+        int i = 0,j=1,cnt=1;
+        while(j<n){
+            if(pairs[i][1] < pairs[j][0]){
+                i = j;
+                j++;
+                cnt++;
+            }
+            else j++;
+        }
+        return cnt;
+    }
+}
